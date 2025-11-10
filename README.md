@@ -36,7 +36,7 @@
 
 
 ## 介面預覽
-<img src="image/interface.png" alt="Gradio 介面" width="50%">
+<img src="image/interface.png" alt="Gradio 介面" width="70%">
 <img src="image/evaluate.png" alt="K-Fold 評估結果" width="40%">
 
 ## 🛠️ 檔案結構
