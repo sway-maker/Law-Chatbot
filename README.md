@@ -21,8 +21,6 @@
 ## 📸 介面預覽
 
 ![Gradio 介面](image/interface.png)  
-*（實際運行後會自動產生公開連結，可截圖替換）*
-
 ![K-Fold 評估結果](https://i.imgur.com/EXAMPLE2.png)
 
 ## 🚀 快速開始
