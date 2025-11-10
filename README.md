@@ -20,6 +20,7 @@
 
 ## 📸 介面預覽
 
+<<<<<<< HEAD
 ![Gradio 介面](image/interface.png)  
 ![K-Fold 評估結果](https://i.imgur.com/EXAMPLE2.png)
 
@@ -33,3 +34,20 @@
 ```bash
 git clone https://github.com/your-username/ey-labor-law-assistant.git
 cd ey-labor-law-assistant
+=======
+![Gradio 介面](https://i.imgur.com/EXAMPLE1.png)  
+*（實際運行後會自動產生公開連結，可截圖替換）*
+
+![K-Fold 評估結果](https://i.imgur.com/EXAMPLE2.png)
+
+## 🚀 快速開始
+
+### 1. 環境需求
+- Python 3.12+
+- 建議使用 GPU（加速 Gemma 模型載入）
+
+### 2. Clone 專案
+```bash
+git clone https://github.com/your-username/ey-labor-law-assistant.git
+cd ey-labor-law-assistant
+>>>>>>> 8a0b8fe533a7274055c10c3153d51f6f58332b3f
