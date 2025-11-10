@@ -5,7 +5,7 @@
 [![Hugging Face](https://img.shields.io/badge/🤗%20Hugging%20Face-Models-yellow)](https://huggingface.co/unsloth/gemma-3-4b-it)
 
 一個基於台灣《勞動基準法》的 **RAG 聊天機器人**，使用 **BM25 + FAISS + RRF 混合檢索**，搭配 **Gemma-3-4B-it** 生成回應。  
-支援 K-Fold 交叉驗證評估，並提供美觀的 Gradio 網頁介面。
+支援 K-Fold 驗證評估，並提供美觀的 Gradio 網頁介面。
 
 > ⚠️ **重要提醒**：本工具由 AI 驅動，回答僅供參考，**不構成正式法律意見**。
 
