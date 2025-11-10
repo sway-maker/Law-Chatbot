@@ -1,4 +1,4 @@
-# 安永銀行勞動權益小助手
+# 勞動權益小助手
 
 [![Python](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/downloads/)
 [![Gradio](https://img.shields.io/badge/Gradio-4.0+-orange.svg)](https://gradio.app/)
@@ -9,7 +9,7 @@
 
 > ⚠️ **重要提醒**：本工具由 AI 驅動，回答僅供參考，**不構成正式法律意見**。
 
-## 🎯 功能特色
+## 功能特色
 
 - **混合檢索 (Hybrid Retrieval)**：BM25 關鍵字 + FAISS 語意 + RRF 融合。
 - **路由機制**：自動判斷問題是否與勞動法相關，無關問題會禮貌拒絕。
@@ -17,7 +17,7 @@
 - **Gradio 介面**：深淺色模式、範例問題、聊天歷史、複製按鈕。
 - **多輪對話支援**：完整保留上下文，適合連續提問。
 
-## 📊 技術架構
+## 技術架構
 ### 混合檢索流程
 - BM25 檢索：基於關鍵字匹配，使用 **jieba** 分詞，適合精確詞彙查詢
 - FAISS 檢索：基於語意相似度，使用 **intfloat/multilingual-e5-base** 嵌入模型
@@ -28,14 +28,14 @@
 - 推理：使用 Hugging Face Transformers
 - 優化：支援量化與 GPU 加速
 
-## 📈 評估方法
+## 評估方法
 使用 K-Fold 交叉驗證（K=5）評估模型表現：
 - 評估指標：語意相似度（Cosine Similarity）
 - 資料來源：**labor_law_qa.docx** 中的 Q&A 對
 - 輸出：每個 Fold 的平均分數與整體平均
 
 
-## 📸 介面預覽
+## 介面預覽
 <img src="image/interface.png" alt="Gradio 介面" width="50%">
 <img src="image/evaluate.png" alt="K-Fold 評估結果" width="40%">
 
@@ -57,5 +57,5 @@ Law-Chatbot/
 ```
 
 
-## ⚖️ 免責聲明
+## 免責聲明
 本專案僅供學習與參考使用，不提供任何法律效力。如需正式法律意見，請諮詢專業律師。
