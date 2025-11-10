@@ -11,12 +11,29 @@
 
 ## 🎯 功能特色
 
-- **全域索引僅法條**：知識庫只包含法條，避免 Q&A 汙染檢索。
 - **混合檢索 (Hybrid Retrieval)**：BM25 關鍵字 + FAISS 語意 + RRF 融合。
 - **路由機制**：自動判斷問題是否與勞動法相關，無關問題會禮貌拒絕。
 - **K-Fold 評估**：使用完整 Q&A 資料集進行 5-Fold 驗證，計算語意相似度來評分。
-- **Gradio 介面**：EY 企業色系、深淺色模式、範例問題、聊天歷史、複製按鈕。
+- **Gradio 介面**：深淺色模式、範例問題、聊天歷史、複製按鈕。
 - **多輪對話支援**：完整保留上下文，適合連續提問。
+
+## 📊 技術架構
+### 混合檢索流程
+- BM25 檢索：基於關鍵字匹配，使用 **jieba** 分詞，適合精確詞彙查詢
+- FAISS 檢索：基於語意相似度，使用 **intfloat/multilingual-e5-base** 嵌入模型
+- RRF 融合：Reciprocal Rank Fusion 整合兩種檢索結果，取 Top-K 相關法條
+
+### 生成模型
+- 模型：**unsloth/gemma-3-4b-it**
+- 推理：使用 Hugging Face Transformers
+- 優化：支援量化與 GPU 加速
+
+## 📈 評估方法
+使用 K-Fold 交叉驗證（K=5）評估模型表現：
+- 評估指標：語意相似度（Cosine Similarity）
+- 資料來源：**labor_law_qa.docx** 中的 Q&A 對
+- 輸出：每個 Fold 的平均分數與整體平均
+
 
 ## 📸 介面預覽
 ![Gradio 介面](image/interface.png)  
@@ -38,10 +55,6 @@ Law-Chatbot/
 ├── main_code.py                  # 主程式（資料處理、索引、RAG、評估）
 └── README.md                     # 本文件
 ```
-
-
-
-
 
 
 ## ⚖️ 免責聲明
