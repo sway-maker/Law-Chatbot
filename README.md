@@ -20,7 +20,7 @@
 
 ## 📸 介面預覽
 ![Gradio 介面](image/interface.png)  
-![K-Fold 評估結果](https://i.imgur.com/EXAMPLE2.png)
+![K-Fold 評估結果](image/evaluate.png)
 
 ## 🛠️ 檔案結構
 ```
@@ -38,6 +38,10 @@ Law-Chatbot/
 ├── main_code.py                  # 主程式（資料處理、索引、RAG、評估）
 └── README.md                     # 本文件
 ```
+
+
+
+
 
 
 ## ⚖️ 免責聲明
