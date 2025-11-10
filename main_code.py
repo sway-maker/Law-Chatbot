@@ -1,4 +1,5 @@
 # labor_law_rag.py (主程式：包含資料處理、索引建立、RAG 核心、K-Fold 評估)
+!pip install -q jieba rank_bm25 sentence-transformers python-docx faiss-cpu transformers accelerate tqdm bitsandbytes scikit-learn gradio
 
 # Python imports
 import os
