@@ -23,7 +23,16 @@
 ![K-Fold 評估結果](https://i.imgur.com/EXAMPLE2.png)
 
 ## 🛠️ 檔案結構
-Law-Chatbot/ ├── File/ │ ├── labor_law_articles # 法條文字檔 │ └── labor_law_qa.docx # Q&A 評估資料 ├── image/ │ ├── interface.png # 介面截圖 │ └── evaluate.png # 評估截圖 ├── interface.py # Gradio 介面 ├── main_code.py # 主程式（資料處理、索引、RAG、評估） └── README.md # 本文件
+Law-Chatbot/
+├── File/
+│   ├── labor_law_articles/      # 法條文字檔
+│   └── labor_law_qa.docx        # Q&A 評估資料
+├── image/
+│   ├── interface.png            # 介面截圖
+│   └── evaluate.png             # 評估截圖
+├── interface.py                 # Gradio 介面
+├── main_code.py                 # 主程式（資料處理、索引、RAG、評估）
+└── README.md                    # 本文件
 
 
 ## ⚖️ 免責聲明
