@@ -20,7 +20,6 @@ footer_html = """
 adaptive_css = """
 /* ========== 深淺色模式變數 ========== */
 :root {
-    /* ★ 修正：背景改為中性淺灰白 */
     --bg-gradient-start: #f5f5f5;
     --bg-gradient-end: #ffffff;
     --card-bg: #ffffff;
@@ -278,18 +277,22 @@ adaptive_css = """
 """
 
 # Gradio 輔助函式
-def handle_submit(message, history_tuples):
-    chat_history_for_gemma = []
-    for user_msg, bot_msg in history_tuples:
-        if user_msg:
-            chat_history_for_gemma.append({"role": "user", "content": user_msg})
-        if bot_msg:
-            chat_history_for_gemma.append({"role": "assistant", "content": bot_msg})
 
+def handle_submit(message, history_messages):
+    """
+    處理 Gradio 的提交事件
+    - ★ 格式修正：history_messages 現在是 "messages" 格式:
+    - [{"role": "user", "content": ...}, {"role": "assistant", "content": ...}]
+    - 呼叫 RAG 核心，使用「全域索引」(僅法條)
+    """
+    # 1. 準備聊天歷史記錄
+    chat_history_for_gemma = history_messages
+
+    # 2. 呼叫 RAG 核心
     try:
         response_text, _ = ask_laborlaw_gemma_conversational_v2(
             query=message,
-            chat_history=chat_history_for_gemma,
+            chat_history=chat_history_for_gemma, # ★ 直接傳入
             faiss_index=global_index,
             chunk_list=chunks,
             emb_model=embedding_model,
@@ -299,16 +302,26 @@ def handle_submit(message, history_tuples):
             debug=False
         )
     except Exception as e:
+        print(f"!!! Gradio Handle Error: {e}")
         response_text = f"抱歉，處理您的請求時發生錯誤：{e}"
 
-    history_tuples.append([message, response_text])
-    return "", history_tuples
+    history_messages.append({"role": "user", "content": message})
+    history_messages.append({"role": "assistant", "content": response_text})
+
+    return "", history_messages
 
 def clear_conversation():
+    """
+    清除對話
+    """
     return "", []
 
-# 建構並啟動 Gradio 介面
+print("Gradio helper functions (handle_submit, clear_conversation) defined.")
+
+# 建構 Gradio 介面
 with gr.Blocks(css=adaptive_css, title="安永銀行勞動權益小助手", elem_classes="contain") as demo:
+
+    # 標題區
     gr.HTML("""
         <div class='title-section'>
             <h1 class='main-title'>🏢 安永銀行勞動權益小助手</h1>
@@ -316,6 +329,7 @@ with gr.Blocks(css=adaptive_css, title="安永銀行勞動權益小助手", elem
         </div>
     """)
 
+    # 聊天區
     chatbot = gr.Chatbot(
         type="messages",
         height=800,
@@ -324,6 +338,7 @@ with gr.Blocks(css=adaptive_css, title="安永銀行勞動權益小助手", elem
         elem_classes="chatbot"
     )
 
+    # 輸入區
     with gr.Row(elem_classes="input-row"):
         message = gr.Textbox(
             placeholder="💬 請輸入您的勞動法規問題...",
@@ -335,6 +350,7 @@ with gr.Blocks(css=adaptive_css, title="安永銀行勞動權益小助手", elem
         send_btn = gr.Button("發送", elem_classes="send-btn", scale=1)
         clear_btn = gr.Button("清除", elem_classes="clear-btn", scale=1)
 
+    # 範例問題
     with gr.Column(elem_classes="examples-section"):
         gr.Examples(
             label="💡 常見問題",
@@ -349,9 +365,11 @@ with gr.Blocks(css=adaptive_css, title="安永銀行勞動權益小助手", elem
 
     gr.HTML(footer_html)
 
+    # 事件綁定
     message.submit(handle_submit, [message, chatbot], [message, chatbot])
     send_btn.click(handle_submit, [message, chatbot], [message, chatbot])
     clear_btn.click(clear_conversation, None, [message, chatbot])
 
 if __name__ == "__main__":
+    print("Launching Gradio App...")
     demo.launch(share=True, debug=True)
