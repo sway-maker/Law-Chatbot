@@ -9,7 +9,7 @@ from labor_law_rag import (  # 從主程式匯入必要變數與函式
     ask_laborlaw_gemma_conversational_v2,
 )
 
-# Gradio 介面 CSS 與 HTML
+# Gradio介面 CSS 與 HTML
 footer_html = """
 <div class='footer-info'>
     <p>⚠️ <strong>重要提醒</strong>：本服務由 AI 驅動，回答僅供參考，不構成正式法律意見</p>
